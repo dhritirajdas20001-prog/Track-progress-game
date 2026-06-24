@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>LifeGame PWA</title>
+  
+  <!-- Web App Capabilities & PWA Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="LifeGame">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <div id="app-container">
+    <!-- --- TOP HEADER STATUS BAR --- -->
+    <header>
+      <div class="header-top">
+        <span class="player-level-badge" id="level-badge">Lvl 1</span>
+        <div class="gold-container">
+          <div class="gold-icon"></div>
+          <span id="gold-amount">0</span>
+        </div>
+      </div>
+      <div class="xp-wrapper">
+        <div class="xp-text">
+          <span>XP Progression</span>
+          <span id="xp-text">0 / 100 XP</span>
+        </div>
+        <progress class="xp-bar" id="xp-progress" value="0" max="100"></progress>
+      </div>
+    </header>
+
+    <!-- --- MAIN CONTENT PANELS --- -->
+    <main>
+      <!-- Tasks View -->
+      <section class="panel active" id="panel-tasks">
+        <h2>Tasks</h2>
+        <div class="weapon-indicator" id="weapon-indicator"></div>
+        <div class="card-list" id="tasks-list">
+          <!-- Dynamically filled -->
+        </div>
+      </section>
+
+      <!-- Stats View -->
+      <section class="panel" id="panel-stats">
+        <h2>Character Sheet</h2>
+        <div class="stats-overview">
+          <div class="stat-box">
+            <span class="stat-label">Level</span>
+            <span class="stat-val" id="stat-level">1</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Gold</span>
+            <span class="stat-val" id="stat-gold" style="color: var(--accent-gold);">0</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">XP</span>
+            <span class="stat-val" id="stat-xp" style="color: var(--accent-primary);">0 / 100</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-label">Completed</span>
+            <span class="stat-val" id="stat-total-tasks" style="color: var(--accent-success);">0</span>
+          </div>
+        </div>
+        <h3 class="stats-section-title">Attributes</h3>
+        <div class="rpg-stats-grid" id="rpg-stats-grid"></div>
+      </section>
+
+      <!-- Journey View -->
+      <section class="panel" id="panel-journey">
+        <h2>Journey</h2>
+        <div class="journey-toggles" id="journey-toggles"></div>
+        <div class="chart-container">
+          <canvas id="journey-chart"></canvas>
+        </div>
+      </section>
+
+      <!-- Character / Paper Doll View -->
+      <section class="panel" id="panel-character">
+        <h2>Character</h2>
+        <div class="paper-doll">
+          <div class="doll-slot" data-slot="Weapon">
+            <span class="slot-icon">🗡️</span>
+            <span class="slot-label">Weapon</span>
+            <span class="slot-item-name" id="slot-weapon-name">Empty</span>
+          </div>
+          <div class="doll-avatar">
+            <span class="avatar-icon">🧙</span>
+            <div class="power-score">
+              <span class="power-label">Total Power</span>
+              <span class="power-val" id="total-power">8</span>
+            </div>
+          </div>
+          <div class="doll-slot" data-slot="Armor">
+            <span class="slot-icon">🛡️</span>
+            <span class="slot-label">Armor</span>
+            <span class="slot-item-name" id="slot-armor-name">Empty</span>
+          </div>
+          <div class="doll-slot" data-slot="Artifact">
+            <span class="slot-icon">💎</span>
+            <span class="slot-label">Artifact</span>
+            <span class="slot-item-name" id="slot-artifact-name">Empty</span>
+          </div>
+          <div class="doll-slot" data-slot="Accessory">
+            <span class="slot-icon">💍</span>
+            <span class="slot-label">Accessory</span>
+            <span class="slot-item-name" id="slot-accessory-name">Empty</span>
+          </div>
+        </div>
+        <h3 class="stats-section-title">Base Stats</h3>
+        <div class="base-stats-grid" id="char-base-stats"></div>
+      </section>
+
+      <!-- Shop View -->
+      <section class="panel" id="panel-shop">
+        <h2>Reward Shop</h2>
+        <div class="card-list" id="rewards-list">
+          <!-- Dynamically filled -->
+        </div>
+      </section>
+    </main>
+
+    <!-- --- FLOATING ACTION BUTTONS --- -->
+    <button class="btn fab" id="btn-add-task">+</button>
+    <button class="btn fab" id="btn-add-reward" style="display: none;">+</button>
+
+    <!-- --- BOTTOM NAVIGATION BAR --- -->
+    <nav>
+      <div class="nav-tab active" id="tab-tasks">
+        <span class="nav-icon">📋</span>
+        <span>Tasks</span>
+      </div>
+      <div class="nav-tab" id="tab-stats">
+        <span class="nav-icon">👤</span>
+        <span>Stats</span>
+      </div>
+      <div class="nav-tab" id="tab-journey">
+        <span class="nav-icon">📈</span>
+        <span>Journey</span>
+      </div>
+      <div class="nav-tab" id="tab-character">
+        <span class="nav-icon">🗡️</span>
+        <span>Equip</span>
+      </div>
+      <div class="nav-tab" id="tab-shop">
+        <span class="nav-icon">🪙</span>
+        <span>Shop</span>
+      </div>
+    </nav>
+
+    <!-- --- CREATE TASK SHEET/MODAL --- -->
+    <div class="modal" id="modal-task">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-title">New Task</span>
+          <button class="modal-close" id="close-task-modal">&times;</button>
+        </div>
+        <form id="form-task">
+          <div class="form-group">
+            <label for="task-title">Title</label>
+            <input type="text" id="task-title" required placeholder="e.g. Read 10 pages, Run 5k">
+          </div>
+          <div class="form-group">
+            <label for="task-type">Type</label>
+            <select id="task-type" required>
+              <option value="daily">Daily</option>
+              <option value="quest">Quest</option>
+            </select>
+          </div>
+          <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+              <label for="task-stat">Stat Boost</label>
+              <select id="task-stat">
+                <option value="">None</option>
+                <option value="strength">Strength</option>
+                <option value="intelligence">Intelligence</option>
+                <option value="dexterity">Dexterity</option>
+                <option value="agility">Agility</option>
+                <option value="stamina">Stamina</option>
+                <option value="vitality">Vitality</option>
+                <option value="faith">Faith</option>
+                <option value="luck">Luck</option>
+              </select>
+            </div>
+            <div>
+              <label for="task-stat-xp">Stat XP</label>
+              <input type="number" id="task-stat-xp" min="0" value="10">
+            </div>
+          </div>
+          <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div>
+              <label for="task-xp">General XP</label>
+              <input type="number" id="task-xp" min="0" value="10" required>
+            </div>
+            <div>
+              <label for="task-gold">Gold Reward</label>
+              <input type="number" id="task-gold" min="0" value="5" required>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-submit">Create Task</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- --- CREATE REWARD SHEET/MODAL --- -->
+    <div class="modal" id="modal-reward">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-title">New Reward</span>
+          <button class="modal-close" id="close-reward-modal">&times;</button>
+        </div>
+        <form id="form-reward">
+          <div class="form-group">
+            <label for="reward-name">Name</label>
+            <input type="text" id="reward-name" required placeholder="e.g. Watch 1 Episode, Eat Icecream">
+          </div>
+          <div class="form-group">
+            <label for="reward-gold-cost">Gold Cost</label>
+            <input type="number" id="reward-gold-cost" min="1" value="15" required>
+          </div>
+          <button type="submit" class="btn btn-submit">Create Reward</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- --- ITEM PICKER MODAL --- -->
+    <div class="modal" id="modal-item-picker">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-title" id="item-picker-title">Select Item</span>
+          <button class="modal-close" id="close-item-picker">&times;</button>
+        </div>
+        <div class="card-list" id="item-picker-list"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

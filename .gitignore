@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+*.pyo
+game.db
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+.env
+*.db-journal
+
+# IDE folders already in repo as binaries — exclude from tracking
+Antigravity IDE/
+
+# Other project directories (separate projects)
+Dashboard/
+pentaspark-api-user-dashboard/
+pentaspark-landing-page/
+search-intelligence-dashboard/
