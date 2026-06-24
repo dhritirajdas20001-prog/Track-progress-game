@@ -455,41 +455,47 @@ const SLOT_ICONS = { Weapon: "🗡️", Armor: "🛡️", Artifact: "💎", Acce
 
 function renderCharacter() {
   const loadout = player.loadout || {};
+  const stats = player.stats || {};
   const slots = ["Weapon", "Armor", "Artifact", "Accessory"];
 
   slots.forEach(slot => {
     const item = loadout[slot.toLowerCase()];
+    const slotEl = document.getElementById(`doll-slot-${slot.toLowerCase()}`);
     const nameEl = document.getElementById(`slot-${slot.toLowerCase()}-name`);
-    const slotEl = nameEl.closest(".doll-slot");
+    const statsEl = document.getElementById(`slot-${slot.toLowerCase()}-stats`);
+
     if (item) {
       nameEl.textContent = item.name;
       slotEl.classList.add("slot-filled");
-      slotEl.classList.remove("slot-empty");
+
+      const meta = STAT_META[item.governing_stat];
+      const label = meta ? meta.label : item.governing_stat;
+      const grade = item.scaling_grade;
+      const req = item.stat_requirement;
+      const effect = item.passive_effect || "";
+
+      statsEl.innerHTML = `
+        <span class="inv-stat"><span class="inv-stat-val">${grade}</span> Grade</span>
+        <span class="inv-stat"><span class="inv-stat-val">${req}</span> ${label}</span>
+        ${effect ? `<span class="inv-stat" style="grid-column:1/-1;font-style:italic;opacity:0.7;">${effect}</span>` : ""}
+      `;
     } else {
       nameEl.textContent = "Empty";
       slotEl.classList.remove("slot-filled");
-      slotEl.classList.add("slot-empty");
+      statsEl.innerHTML = `
+        <span class="inv-stat">-- Grade</span>
+        <span class="inv-stat">-- Stat</span>
+      `;
     }
   });
 
   let totalPower = 0;
-  const stats = player.stats || {};
   for (const key of Object.keys(STAT_META)) {
     totalPower += (stats[key] ? stats[key].level : 1);
   }
   document.getElementById("total-power").textContent = totalPower;
 
-  const grid = document.getElementById("char-base-stats");
-  grid.innerHTML = "";
-  for (const [key, meta] of Object.entries(STAT_META)) {
-    const s = stats[key] || { level: 1 };
-    const el = document.createElement("div");
-    el.className = "char-stat-chip";
-    el.innerHTML = `<span>${meta.icon}</span><span style="color:${meta.color};font-weight:700;">${s.level}</span><span class="char-stat-name">${meta.label}</span>`;
-    grid.appendChild(el);
-  }
-
-  document.querySelectorAll(".doll-slot").forEach(slotEl => {
+  document.querySelectorAll(".inv-slot").forEach(slotEl => {
     slotEl.onclick = () => openItemPicker(slotEl.dataset.slot);
   });
 }

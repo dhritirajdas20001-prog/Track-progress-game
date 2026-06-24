@@ -603,180 +603,189 @@ nav {
   color: var(--accent-danger);
 }
 
-/* --- PAPER DOLL / CHARACTER TAB --- */
-.paper-doll {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto auto auto;
-  gap: 10px;
-  margin-bottom: 24px;
-}
-
-.doll-cell-empty {
-  visibility: hidden;
-}
-
-.doll-avatar {
+/* --- RPG INVENTORY / LOADOUT TAB --- */
+.inv-layout {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.inv-top, .inv-bottom {
+  display: flex;
+  justify-content: center;
+}
+
+.inv-middle {
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4px;
-  gap: 4px;
+  gap: 10px;
+  width: 100%;
 }
 
-.avatar-frame {
-  position: relative;
+/* --- Character sprite --- */
+.inv-character {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-shrink: 0;
+  padding: 0 4px;
 }
 
-.avatar-img {
-  width: 110px;
-  height: 110px;
+.inv-char-img {
+  width: 120px;
+  height: 140px;
   object-fit: contain;
   image-rendering: pixelated;
   animation: idle-bob 2.4s ease-in-out infinite;
-  filter: drop-shadow(0 2px 8px rgba(139, 92, 246, 0.3));
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
 }
 
-.avatar-shadow {
+.inv-char-shadow {
   width: 60px;
-  height: 10px;
+  height: 8px;
   border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(139, 92, 246, 0.25) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.5) 0%, transparent 70%);
   animation: shadow-pulse 2.4s ease-in-out infinite;
-  margin-top: -4px;
+  margin-top: -2px;
 }
 
 @keyframes idle-bob {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+  50% { transform: translateY(-6px); }
 }
 
 @keyframes shadow-pulse {
   0%, 100% { transform: scaleX(1); opacity: 0.7; }
-  50% { transform: scaleX(0.85); opacity: 0.4; }
+  50% { transform: scaleX(0.8); opacity: 0.35; }
 }
 
-.power-score {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.power-label {
-  font-size: 0.6rem;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.power-val {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--accent-gold);
-}
-
-.doll-slot {
-  background-color: var(--bg-surface);
-  border: 2px dashed #2a2a38;
-  border-radius: var(--border-radius-md);
-  padding: 12px 8px;
+/* --- Equipment slot cards --- */
+.inv-slot {
+  width: 130px;
+  min-height: 110px;
+  background: linear-gradient(160deg, #2a2418 0%, #1e1a12 50%, #171309 100%);
+  border: 2px solid #4a3f2a;
+  border-radius: 6px;
+  padding: 10px 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   cursor: pointer;
   transition: var(--transition-smooth);
   text-align: center;
-  aspect-ratio: 1;
-  justify-content: center;
+  position: relative;
 }
 
-.doll-slot:hover {
-  border-color: var(--accent-primary);
-  background-color: rgba(139, 92, 246, 0.03);
+.inv-slot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  border: 1px solid rgba(196, 164, 96, 0.08);
+  pointer-events: none;
 }
 
-.doll-slot:active {
+.inv-slot:hover {
+  border-color: #8b7440;
+  background: linear-gradient(160deg, #332c1e 0%, #261f14 50%, #1c150c 100%);
+}
+
+.inv-slot:active {
   transform: scale(0.96);
 }
 
-.doll-slot.slot-filled {
-  border-style: solid;
-  border-color: var(--accent-primary);
-  background-color: rgba(139, 92, 246, 0.06);
-  box-shadow: 0 0 16px var(--accent-primary-glow);
+.inv-slot.slot-filled {
+  border-color: #c4a060;
+  box-shadow: 0 0 14px rgba(196, 160, 96, 0.15);
 }
 
-.slot-icon-wrap {
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.inv-slot.slot-filled::before {
+  border-color: rgba(196, 164, 96, 0.2);
 }
 
-.slot-svg {
-  width: 24px;
-  height: 24px;
-  color: var(--color-text-muted);
-  transition: color 0.2s ease;
-}
-
-.slot-filled .slot-svg {
-  color: var(--accent-primary);
-}
-
-.slot-label {
-  font-size: 0.55rem;
-  color: var(--color-text-muted);
+.inv-slot-title {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #c4a060;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-}
-
-.slot-item-name {
-  font-size: 0.65rem;
-  font-weight: 600;
-  color: var(--color-text-secondary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
-  line-height: 1.2;
 }
 
-.slot-filled .slot-item-name {
-  color: var(--color-text-primary);
+.inv-slot:not(.slot-filled) .inv-slot-title {
+  color: #5a4f3a;
 }
 
-/* Base stats grid on character tab */
-.base-stats-grid {
+.inv-slot-icon {
+  font-size: 1.6rem;
+  line-height: 1;
+  opacity: 0.3;
+  transition: opacity 0.2s ease;
+}
+
+.inv-slot.slot-filled .inv-slot-icon {
+  opacity: 1;
+}
+
+.inv-slot-stats {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 8px;
+  width: 100%;
 }
 
-.char-stat-chip {
-  background-color: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius-sm);
-  padding: 8px 4px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  font-size: 0.9rem;
-}
-
-.char-stat-name {
+.inv-stat {
   font-size: 0.55rem;
-  color: var(--color-text-muted);
+  color: #6b5f44;
+  font-weight: 600;
   text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.inv-stat-val {
+  color: #c4a060;
+}
+
+.inv-slot.slot-filled .inv-stat {
+  color: #8b7c5a;
+}
+
+.inv-slot.slot-filled .inv-stat-val {
+  color: #e0c878;
+}
+
+/* --- Power footer --- */
+.inv-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0 4px;
+  border-top: 1px solid #2a2418;
+  width: 100%;
+  justify-content: center;
+}
+
+.inv-footer-label {
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #8b7c5a;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.inv-footer-val {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #e0c878;
 }
 
 /* --- ITEM PICKER MODAL --- */

@@ -82,50 +82,51 @@
 
       <!-- Character / Paper Doll View -->
       <section class="panel" id="panel-character">
-        <h2>Loadout</h2>
-        <div class="paper-doll">
-          <!-- Row 1: Armor (top center) -->
-          <div class="doll-cell doll-cell-empty"></div>
-          <div class="doll-slot" data-slot="Armor" id="doll-slot-armor">
-            <div class="slot-icon-wrap"><svg class="slot-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L4 7v5c0 5 3.5 9.7 8 11 4.5-1.3 8-6 8-11V7l-8-5z"/></svg></div>
-            <span class="slot-label">Armor</span>
-            <span class="slot-item-name" id="slot-armor-name">Empty</span>
-          </div>
-          <div class="doll-cell doll-cell-empty"></div>
-
-          <!-- Row 2: Weapon (left), Avatar (center), Artifact (right) -->
-          <div class="doll-slot" data-slot="Weapon" id="doll-slot-weapon">
-            <div class="slot-icon-wrap"><svg class="slot-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.5 2l6 6-9 9-1.5-1.5L5 22l6-5-1.5-1.5 9-9z"/><path d="M18 6l-2-2"/></svg></div>
-            <span class="slot-label">Weapon</span>
-            <span class="slot-item-name" id="slot-weapon-name">Empty</span>
-          </div>
-          <div class="doll-avatar">
-            <div class="avatar-frame">
-              <img src="character.png" alt="Character" class="avatar-img">
-              <div class="avatar-shadow"></div>
-            </div>
-            <div class="power-score">
-              <span class="power-label">Total Power</span>
-              <span class="power-val" id="total-power">8</span>
+        <div class="inv-layout">
+          <!-- Top slot: Armor -->
+          <div class="inv-top">
+            <div class="inv-slot" data-slot="Armor" id="doll-slot-armor">
+              <span class="inv-slot-title" id="slot-armor-name">Empty</span>
+              <div class="inv-slot-icon">🛡️</div>
+              <div class="inv-slot-stats" id="slot-armor-stats"></div>
             </div>
           </div>
-          <div class="doll-slot" data-slot="Artifact" id="doll-slot-artifact">
-            <div class="slot-icon-wrap"><svg class="slot-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3 7h7l-5.5 4.5 2 7L12 16l-6.5 4.5 2-7L2 9h7l3-7z"/></svg></div>
-            <span class="slot-label">Artifact</span>
-            <span class="slot-item-name" id="slot-artifact-name">Empty</span>
+
+          <!-- Middle row: Weapon | Character | Artifact -->
+          <div class="inv-middle">
+            <div class="inv-slot" data-slot="Weapon" id="doll-slot-weapon">
+              <span class="inv-slot-title" id="slot-weapon-name">Empty</span>
+              <div class="inv-slot-icon">🗡️</div>
+              <div class="inv-slot-stats" id="slot-weapon-stats"></div>
+            </div>
+
+            <div class="inv-character">
+              <img src="character.png" alt="Character" class="inv-char-img">
+              <div class="inv-char-shadow"></div>
+            </div>
+
+            <div class="inv-slot" data-slot="Artifact" id="doll-slot-artifact">
+              <span class="inv-slot-title" id="slot-artifact-name">Empty</span>
+              <div class="inv-slot-icon">💎</div>
+              <div class="inv-slot-stats" id="slot-artifact-stats"></div>
+            </div>
           </div>
 
-          <!-- Row 3: Accessory (bottom center) -->
-          <div class="doll-cell doll-cell-empty"></div>
-          <div class="doll-slot" data-slot="Accessory" id="doll-slot-accessory">
-            <div class="slot-icon-wrap"><svg class="slot-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="4" r="2.5" fill="currentColor" opacity="0.3"/></svg></div>
-            <span class="slot-label">Accessory</span>
-            <span class="slot-item-name" id="slot-accessory-name">Empty</span>
+          <!-- Bottom slot: Accessory -->
+          <div class="inv-bottom">
+            <div class="inv-slot" data-slot="Accessory" id="doll-slot-accessory">
+              <span class="inv-slot-title" id="slot-accessory-name">Empty</span>
+              <div class="inv-slot-icon">💍</div>
+              <div class="inv-slot-stats" id="slot-accessory-stats"></div>
+            </div>
           </div>
-          <div class="doll-cell doll-cell-empty"></div>
+
+          <!-- Power footer -->
+          <div class="inv-footer">
+            <span class="inv-footer-label">Total Power:</span>
+            <span class="inv-footer-val" id="total-power">8</span>
+          </div>
         </div>
-        <h3 class="stats-section-title">Base Stats</h3>
-        <div class="base-stats-grid" id="char-base-stats"></div>
       </section>
 
       <!-- Shop View -->
