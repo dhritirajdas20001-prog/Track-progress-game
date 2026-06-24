@@ -1,14 +1,14 @@
-const CACHE_NAME = "lifegame-cache-v1";
+const CACHE_NAME = "lifegame-cache-v2";
 const ASSETS = [
   "/",
   "/index.html",
   "/styles.css",
   "/app.js",
   "/manifest.json",
-  "/icon.png"
+  "/icon.png",
+  "/character.png"
 ];
 
-// Install Event
 self.addEventListener("install", (e) => {
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -17,7 +17,6 @@ self.addEventListener("install", (e) => {
   );
 });
 
-// Activate Event
 self.addEventListener("activate", (e) => {
   e.waitUntil(
     caches.keys().then((keys) => {
@@ -32,32 +31,28 @@ self.addEventListener("activate", (e) => {
   );
 });
 
-// Fetch Event
 self.addEventListener("fetch", (e) => {
-  // Only intercept local assets (not API endpoints)
   const url = new URL(e.request.url);
   if (url.pathname.startsWith("/api/")) {
-    return; // Let API requests go directly to network
+    return;
   }
 
   e.respondWith(
-    caches.match(e.request).then((cachedResponse) => {
-      if (cachedResponse) {
-        return cachedResponse;
+    fetch(e.request).then((networkResponse) => {
+      if (networkResponse.status === 200) {
+        const responseClone = networkResponse.clone();
+        caches.open(CACHE_NAME).then((cache) => {
+          cache.put(e.request, responseClone);
+        });
       }
-      return fetch(e.request).then((networkResponse) => {
-        if (networkResponse.status === 200) {
-          const responseClone = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(e.request, responseClone);
-          });
-        }
-        return networkResponse;
-      });
+      return networkResponse;
     }).catch(() => {
-      if (e.request.mode === "navigate") {
-        return caches.match("/index.html");
-      }
+      return caches.match(e.request).then((cachedResponse) => {
+        if (cachedResponse) return cachedResponse;
+        if (e.request.mode === "navigate") {
+          return caches.match("/index.html");
+        }
+      });
     })
   );
 });
