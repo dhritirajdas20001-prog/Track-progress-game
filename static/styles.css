@@ -621,14 +621,43 @@ nav {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 8px;
-  gap: 6px;
+  padding: 4px;
+  gap: 4px;
 }
 
-.avatar-svg {
-  width: 70px;
-  height: 105px;
-  filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.2));
+.avatar-frame {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar-img {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  image-rendering: pixelated;
+  animation: idle-bob 2.4s ease-in-out infinite;
+  filter: drop-shadow(0 2px 8px rgba(139, 92, 246, 0.3));
+}
+
+.avatar-shadow {
+  width: 60px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(139, 92, 246, 0.25) 0%, transparent 70%);
+  animation: shadow-pulse 2.4s ease-in-out infinite;
+  margin-top: -4px;
+}
+
+@keyframes idle-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes shadow-pulse {
+  0%, 100% { transform: scaleX(1); opacity: 0.7; }
+  50% { transform: scaleX(0.85); opacity: 0.4; }
 }
 
 .power-score {
