@@ -80,8 +80,11 @@ document.addEventListener("DOMContentLoaded", () => {
 function registerServiceWorker() {
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
-      navigator.serviceWorker.register("/sw.js")
-        .then(reg => console.log("Service Worker registered successfully:", reg.scope))
+      navigator.serviceWorker.register("/sw.js?v=3")
+        .then(reg => {
+          reg.update();
+          console.log("Service Worker registered:", reg.scope);
+        })
         .catch(err => console.error("Service Worker registration failed:", err));
     });
   }

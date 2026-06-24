@@ -11,7 +11,7 @@
   <meta name="apple-mobile-web-app-title" content="LifeGame">
   <link rel="apple-touch-icon" href="icon.png">
   <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=3">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -254,6 +254,15 @@
 
   </div>
 
-  <script src="app.js"></script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(regs => {
+      regs.forEach(r => r.unregister());
+    }).then(() => caches.keys()).then(keys => {
+      return Promise.all(keys.map(k => caches.delete(k)));
+    });
+  }
+  </script>
+  <script src="app.js?v=3"></script>
 </body>
 </html>
