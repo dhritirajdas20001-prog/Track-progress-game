@@ -633,32 +633,45 @@ nav {
   padding: 0 4px;
 }
 
+.inv-character {
+  background: transparent;
+}
+
 .inv-char-img {
-  width: 120px;
-  height: 140px;
+  width: 130px;
+  height: 150px;
   object-fit: contain;
   image-rendering: pixelated;
-  animation: idle-bob 2.4s ease-in-out infinite;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
+  mix-blend-mode: screen;
+  animation: char-idle 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 6px rgba(139, 92, 246, 0.15));
 }
 
 .inv-char-shadow {
-  width: 60px;
+  width: 50px;
   height: 8px;
   border-radius: 50%;
-  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.5) 0%, transparent 70%);
-  animation: shadow-pulse 2.4s ease-in-out infinite;
-  margin-top: -2px;
+  background: radial-gradient(ellipse, rgba(139, 92, 246, 0.3) 0%, transparent 70%);
+  animation: shadow-idle 3s ease-in-out infinite;
+  margin-top: -4px;
 }
 
-@keyframes idle-bob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+@keyframes char-idle {
+  0%   { transform: translateY(0) scaleY(1) rotate(0deg); }
+  15%  { transform: translateY(-4px) scaleY(1.01) rotate(0.3deg); }
+  30%  { transform: translateY(-7px) scaleY(1.015) rotate(0deg); }
+  50%  { transform: translateY(-5px) scaleY(1.01) rotate(-0.3deg); }
+  70%  { transform: translateY(-2px) scaleY(0.995) rotate(0deg); }
+  85%  { transform: translateY(1px) scaleY(0.99) rotate(0.2deg); }
+  100% { transform: translateY(0) scaleY(1) rotate(0deg); }
 }
 
-@keyframes shadow-pulse {
-  0%, 100% { transform: scaleX(1); opacity: 0.7; }
-  50% { transform: scaleX(0.8); opacity: 0.35; }
+@keyframes shadow-idle {
+  0%   { transform: scaleX(1); opacity: 0.6; }
+  30%  { transform: scaleX(0.75); opacity: 0.3; }
+  70%  { transform: scaleX(0.95); opacity: 0.55; }
+  85%  { transform: scaleX(1.05); opacity: 0.65; }
+  100% { transform: scaleX(1); opacity: 0.6; }
 }
 
 /* --- Equipment slot cards --- */
