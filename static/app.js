@@ -76,19 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
   registerServiceWorker();
 });
 
-// --- SERVICE WORKER REGISTRATION ---
-function registerServiceWorker() {
-  if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.register("/sw.js?v=3")
-        .then(reg => {
-          reg.update();
-          console.log("Service Worker registered:", reg.scope);
-        })
-        .catch(err => console.error("Service Worker registration failed:", err));
-    });
-  }
-}
+function registerServiceWorker() {}
 
 // --- NAVIGATION & TABS ---
 function setupNavigation() {

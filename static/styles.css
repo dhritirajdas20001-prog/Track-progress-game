@@ -642,7 +642,6 @@ nav {
   height: 150px;
   object-fit: contain;
   image-rendering: pixelated;
-  mix-blend-mode: screen;
   animation: char-idle 3s ease-in-out infinite;
   filter: drop-shadow(0 0 6px rgba(139, 92, 246, 0.15));
 }
