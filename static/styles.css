@@ -606,24 +606,29 @@ nav {
 /* --- PAPER DOLL / CHARACTER TAB --- */
 .paper-doll {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+}
+
+.doll-cell-empty {
+  visibility: hidden;
 }
 
 .doll-avatar {
-  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 16px;
-  gap: 8px;
+  padding: 8px;
+  gap: 6px;
 }
 
-.avatar-icon {
-  font-size: 3rem;
-  line-height: 1;
+.avatar-svg {
+  width: 70px;
+  height: 105px;
+  filter: drop-shadow(0 0 12px rgba(139, 92, 246, 0.2));
 }
 
 .power-score {
@@ -634,7 +639,7 @@ nav {
 }
 
 .power-label {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -642,54 +647,78 @@ nav {
 
 .power-val {
   font-family: var(--font-display);
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--accent-gold);
 }
 
 .doll-slot {
   background-color: var(--bg-surface);
-  border: 1px dashed var(--border-color);
+  border: 2px dashed #2a2a38;
   border-radius: var(--border-radius-md);
-  padding: 14px 10px;
+  padding: 12px 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   cursor: pointer;
   transition: var(--transition-smooth);
   text-align: center;
+  aspect-ratio: 1;
+  justify-content: center;
 }
 
 .doll-slot:hover {
   border-color: var(--accent-primary);
+  background-color: rgba(139, 92, 246, 0.03);
+}
+
+.doll-slot:active {
+  transform: scale(0.96);
 }
 
 .doll-slot.slot-filled {
   border-style: solid;
   border-color: var(--accent-primary);
-  background-color: rgba(139, 92, 246, 0.04);
+  background-color: rgba(139, 92, 246, 0.06);
+  box-shadow: 0 0 16px var(--accent-primary-glow);
 }
 
-.slot-icon {
-  font-size: 1.4rem;
+.slot-icon-wrap {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slot-svg {
+  width: 24px;
+  height: 24px;
+  color: var(--color-text-muted);
+  transition: color 0.2s ease;
+}
+
+.slot-filled .slot-svg {
+  color: var(--accent-primary);
 }
 
 .slot-label {
-  font-size: 0.6rem;
+  font-size: 0.55rem;
   color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .slot-item-name {
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   font-weight: 600;
   color: var(--color-text-secondary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+  line-height: 1.2;
 }
 
 .slot-filled .slot-item-name {

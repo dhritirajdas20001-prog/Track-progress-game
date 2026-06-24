@@ -82,35 +82,50 @@
 
       <!-- Character / Paper Doll View -->
       <section class="panel" id="panel-character">
-        <h2>Character</h2>
+        <h2>Loadout</h2>
         <div class="paper-doll">
-          <div class="doll-slot" data-slot="Weapon">
-            <span class="slot-icon">🗡️</span>
+          <!-- Row 1: Armor (top center) -->
+          <div class="doll-cell doll-cell-empty"></div>
+          <div class="doll-slot" data-slot="Armor" id="doll-slot-armor">
+            <div class="slot-icon-wrap"><svg class="slot-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L4 7v5c0 5 3.5 9.7 8 11 4.5-1.3 8-6 8-11V7l-8-5z"/></svg></div>
+            <span class="slot-label">Armor</span>
+            <span class="slot-item-name" id="slot-armor-name">Empty</span>
+          </div>
+          <div class="doll-cell doll-cell-empty"></div>
+
+          <!-- Row 2: Weapon (left), Avatar (center), Artifact (right) -->
+          <div class="doll-slot" data-slot="Weapon" id="doll-slot-weapon">
+            <div class="slot-icon-wrap"><svg class="slot-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.5 2l6 6-9 9-1.5-1.5L5 22l6-5-1.5-1.5 9-9z"/><path d="M18 6l-2-2"/></svg></div>
             <span class="slot-label">Weapon</span>
             <span class="slot-item-name" id="slot-weapon-name">Empty</span>
           </div>
           <div class="doll-avatar">
-            <span class="avatar-icon">🧙</span>
+            <svg class="avatar-svg" viewBox="0 0 80 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="24" r="14" stroke="#8b5cf6" stroke-width="2" fill="rgba(139,92,246,0.08)"/>
+              <path d="M40 38 C20 38 12 54 12 68 L12 80 C12 82 14 84 16 84 L64 84 C66 84 68 82 68 80 L68 68 C68 54 60 38 40 38Z" stroke="#8b5cf6" stroke-width="2" fill="rgba(139,92,246,0.05)"/>
+              <line x1="12" y1="84" x2="24" y2="110" stroke="#6d28d9" stroke-width="2" stroke-linecap="round"/>
+              <line x1="68" y1="84" x2="56" y2="110" stroke="#6d28d9" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="34" cy="22" r="2" fill="#a78bfa"/><circle cx="46" cy="22" r="2" fill="#a78bfa"/>
+            </svg>
             <div class="power-score">
               <span class="power-label">Total Power</span>
               <span class="power-val" id="total-power">8</span>
             </div>
           </div>
-          <div class="doll-slot" data-slot="Armor">
-            <span class="slot-icon">🛡️</span>
-            <span class="slot-label">Armor</span>
-            <span class="slot-item-name" id="slot-armor-name">Empty</span>
-          </div>
-          <div class="doll-slot" data-slot="Artifact">
-            <span class="slot-icon">💎</span>
+          <div class="doll-slot" data-slot="Artifact" id="doll-slot-artifact">
+            <div class="slot-icon-wrap"><svg class="slot-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3 7h7l-5.5 4.5 2 7L12 16l-6.5 4.5 2-7L2 9h7l3-7z"/></svg></div>
             <span class="slot-label">Artifact</span>
             <span class="slot-item-name" id="slot-artifact-name">Empty</span>
           </div>
-          <div class="doll-slot" data-slot="Accessory">
-            <span class="slot-icon">💍</span>
+
+          <!-- Row 3: Accessory (bottom center) -->
+          <div class="doll-cell doll-cell-empty"></div>
+          <div class="doll-slot" data-slot="Accessory" id="doll-slot-accessory">
+            <div class="slot-icon-wrap"><svg class="slot-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="4" r="2.5" fill="currentColor" opacity="0.3"/></svg></div>
             <span class="slot-label">Accessory</span>
             <span class="slot-item-name" id="slot-accessory-name">Empty</span>
           </div>
+          <div class="doll-cell doll-cell-empty"></div>
         </div>
         <h3 class="stats-section-title">Base Stats</h3>
         <div class="base-stats-grid" id="char-base-stats"></div>

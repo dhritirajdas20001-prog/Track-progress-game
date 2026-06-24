@@ -1,4 +1,5 @@
 import os
+from contextlib import asynccontextmanager
 from typing import List, Optional
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -211,12 +212,39 @@ class RewardSchema(BaseModel):
         from_attributes = True
 
 
+STARTER_ITEMS = [
+    ("Focus Timer", "Weapon", "intelligence", 1, "C", "Channel deep work sessions"),
+    ("Discipline Edge", "Weapon", "strength", 1, "C", "Steady force through repetition"),
+    ("Reflex Blade", "Weapon", "dexterity", 1, "C", "Precision under pressure"),
+    ("Comfortable Hoodie", "Armor", "stamina", 1, "C", "Resist distractions and fatigue"),
+    ("Focus Cloak", "Armor", "vitality", 1, "C", "Sustained attention over hours"),
+    ("Insight Pendant", "Artifact", "intelligence", 1, "B", "Pattern recognition boost"),
+    ("Lucky Coin", "Accessory", "luck", 1, "C", "Serendipitous encounters"),
+    ("Sprint Ring", "Accessory", "agility", 1, "C", "Quick task turnaround"),
+]
+
+
+@asynccontextmanager
+async def lifespan(app):
+    db = SessionLocal()
+    try:
+        if db.query(ItemModel).count() == 0:
+            for name, slot, stat, req, grade, effect in STARTER_ITEMS:
+                db.add(ItemModel(name=name, slot_type=slot, governing_stat=stat,
+                                 stat_requirement=req, scaling_grade=grade, passive_effect=effect))
+            db.commit()
+    finally:
+        db.close()
+    yield
+
+
 # --- FASTAPI APP ---
 
 app = FastAPI(
     title="Gamified Life API",
     description="A minimalist, high-performance API to gamify tasks and rewards.",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan,
 )
 
 # Enable CORS for frontend integration
