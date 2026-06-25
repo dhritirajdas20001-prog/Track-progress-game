@@ -139,6 +139,11 @@ function setupModals() {
   // Close Item Picker Modal
   elements.closeItemPicker.addEventListener("click", () => elements.modalItemPicker.classList.remove("active"));
 
+  // Show/hide Stat XP field based on stat selection
+  document.getElementById("task-stat").addEventListener("change", (e) => {
+    document.getElementById("stat-xp-group").style.display = e.target.value ? "flex" : "none";
+  });
+
   // Submit Task Form
   elements.formTask.addEventListener("submit", async (e) => {
     e.preventDefault();

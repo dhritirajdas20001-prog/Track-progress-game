@@ -187,25 +187,23 @@
               <option value="quest">Quest</option>
             </select>
           </div>
-          <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-            <div>
-              <label for="task-stat">Stat Boost</label>
-              <select id="task-stat">
-                <option value="">None</option>
-                <option value="strength">Strength</option>
-                <option value="intelligence">Intelligence</option>
-                <option value="dexterity">Dexterity</option>
-                <option value="agility">Agility</option>
-                <option value="stamina">Stamina</option>
-                <option value="vitality">Vitality</option>
-                <option value="faith">Faith</option>
-                <option value="luck">Luck</option>
-              </select>
-            </div>
-            <div>
-              <label for="task-stat-xp">Stat XP</label>
-              <input type="number" id="task-stat-xp" min="0" value="10">
-            </div>
+          <div class="form-group">
+            <label for="task-stat">Stat Boost</label>
+            <select id="task-stat">
+              <option value="">-- No Stat --</option>
+              <option value="strength">⚔️ STR — Execution</option>
+              <option value="intelligence">🧠 INT — Deep Work</option>
+              <option value="dexterity">🎯 DEX — Precision</option>
+              <option value="agility">💨 AGI — Quick Tasks</option>
+              <option value="stamina">🛡️ STA — Endurance</option>
+              <option value="vitality">❤️ VIT — Health</option>
+              <option value="faith">✨ FTH — Vision</option>
+              <option value="luck">🍀 LCK — Exploration</option>
+            </select>
+          </div>
+          <div class="form-group" id="stat-xp-group" style="display: none;">
+            <label for="task-stat-xp">Stat XP Reward</label>
+            <input type="number" id="task-stat-xp" min="1" value="10">
           </div>
           <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
             <div>
