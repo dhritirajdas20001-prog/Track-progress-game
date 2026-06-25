@@ -515,30 +515,25 @@ nav {
   background: transparent;
 }
 
-.inv-char-img {
+/* Sprite sheet animation — 6 frames, 478px each, total 2868px */
+.inv-char-sprite {
   width: 120px;
-  height: 140px;
-  object-fit: contain;
+  height: 120px;
+  background: url('character-idle.png') left center / 720px 120px no-repeat;
   image-rendering: pixelated;
-  animation: char-idle 2.8s ease-in-out infinite;
+  animation: sprite-idle 0.9s steps(6) infinite;
 }
 
 .inv-char-shadow {
   width: 40px;
   height: 4px;
   background: rgba(0, 0, 0, 0.4);
-  animation: shadow-idle 2.8s ease-in-out infinite;
-  margin-top: -2px;
+  margin-top: 2px;
 }
 
-@keyframes char-idle {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
-}
-
-@keyframes shadow-idle {
-  0%, 100% { transform: scaleX(1); opacity: 0.5; }
-  50% { transform: scaleX(0.8); opacity: 0.3; }
+@keyframes sprite-idle {
+  from { background-position: 0 center; }
+  to { background-position: -720px center; }
 }
 
 /* Equipment slots — FF-window style */
