@@ -671,8 +671,8 @@ function renderJourneyChart() {
     {
       label: "General XP",
       data: journeyData.map(d => d.general_xp),
-      borderColor: "#8b5cf6",
-      backgroundColor: "rgba(139, 92, 246, 0.1)",
+      borderColor: "#c8a84e",
+      backgroundColor: "rgba(200, 168, 78, 0.1)",
       tension: 0.3,
       fill: true,
       pointRadius: 3,
@@ -712,13 +712,13 @@ function renderJourneyChart() {
       },
       plugins: {
         legend: {
-          labels: { color: "#9ca3af", font: { size: 11 }, boxWidth: 12, padding: 10 },
+          labels: { color: "#8a8078", font: { size: 8, family: "'Press Start 2P'" }, boxWidth: 10, padding: 8 },
         },
         tooltip: {
-          backgroundColor: "#1a1a22",
-          titleColor: "#f3f4f6",
-          bodyColor: "#9ca3af",
-          borderColor: "#252530",
+          backgroundColor: "#0f0e12",
+          titleColor: "#e8e0d4",
+          bodyColor: "#8a8078",
+          borderColor: "#2a2530",
           borderWidth: 1,
         },
       },
