@@ -676,8 +676,8 @@ function renderJourneyChart() {
     {
       label: "General XP",
       data: journeyData.map(d => d.general_xp),
-      borderColor: "#c8a84e",
-      backgroundColor: "rgba(200, 168, 78, 0.1)",
+      borderColor: "#48a848",
+      backgroundColor: "rgba(72, 168, 72, 0.08)",
       tension: 0.3,
       fill: true,
       pointRadius: 3,
@@ -706,13 +706,13 @@ function renderJourneyChart() {
       interaction: { mode: "index", intersect: false },
       scales: {
         x: {
-          ticks: { color: "#6b7280", font: { size: 10 } },
-          grid: { color: "rgba(37, 37, 48, 0.5)" },
+          ticks: { color: "#585060", font: { size: 8, family: "'Press Start 2P'" } },
+          grid: { color: "rgba(44, 48, 72, 0.4)" },
         },
         y: {
           beginAtZero: true,
-          ticks: { color: "#6b7280", font: { size: 10 } },
-          grid: { color: "rgba(37, 37, 48, 0.5)" },
+          ticks: { color: "#585060", font: { size: 8, family: "'Press Start 2P'" } },
+          grid: { color: "rgba(44, 48, 72, 0.4)" },
         },
       },
       plugins: {
@@ -720,10 +720,10 @@ function renderJourneyChart() {
           labels: { color: "#8a8078", font: { size: 8, family: "'Press Start 2P'" }, boxWidth: 10, padding: 8 },
         },
         tooltip: {
-          backgroundColor: "#0f0e12",
-          titleColor: "#e8e0d4",
-          bodyColor: "#8a8078",
-          borderColor: "#2a2530",
+          backgroundColor: "#141824",
+          titleColor: "#e8e0d0",
+          bodyColor: "#908878",
+          borderColor: "#384060",
           borderWidth: 1,
         },
       },
